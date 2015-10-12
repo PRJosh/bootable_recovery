@@ -38,6 +38,9 @@ LOCAL_STATIC_LIBRARIES = \
     libsparse_static \
     libz
 endif
+ifneq ($(wildcard external/lz4/Android.mk),)
+    LOCAL_STATIC_LIBRARIES += liblz4-static
+endif
 endif
 
 LOCAL_STATIC_LIBRARIES += $(TARGET_RECOVERY_UPDATER_LIBS) $(TARGET_RECOVERY_UPDATER_EXTRA_LIBS)
@@ -94,7 +97,7 @@ $(inc) : $(inc_dep_file)
 	$(hide) $(foreach lib,$(libs),echo "  Register_$(lib)();" >> $@;)
 	$(hide) echo "}" >> $@
 
-$(call intermediates-dir-for,EXECUTABLES,updater)/updater.o : $(inc)
+$(call intermediates-dir-for,EXECUTABLES,updater,,,$(TARGET_PREFER_32_BIT))/updater.o : $(inc)
 LOCAL_C_INCLUDES += $(dir $(inc))
 
 inc :=

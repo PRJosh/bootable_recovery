@@ -97,7 +97,7 @@ $(warning **********************************************************************
 $(error stop)
 endif
 endif
-LOCAL_C_INCLUDES += bionic external/stlport/stlport
+LOCAL_C_INCLUDES += bionic external/stlport/stlport system/core/libpixelflinger/include
 LOCAL_CFLAGS += -DTWRES=\"$(TWRES_PATH)\"
 
 include $(BUILD_STATIC_LIBRARY)
